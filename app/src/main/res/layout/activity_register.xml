@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/emailField"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="#17D31F2E"
+        android:backgroundTint="#D31F2E"
+        android:baselineAligned="false"
+        android:hint="อีเมล"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/passwordField"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:background="#17D31F2E"
+        android:backgroundTint="#D31F2E"
+        android:hint="รหัสผ่าน"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="213dp"
+        android:layout_height="69dp"
+        android:backgroundTint="#D31F2E"
+        android:text="สมัครสมาชิก"
+        android:textSize="24sp" />
+</LinearLayout>

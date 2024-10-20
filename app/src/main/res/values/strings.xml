@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Canteen</string>
+    <string-array name="status_array">
+        <item>เปิด</item>
+        <item>ปิด</item>
+    </string-array>
+</resources>

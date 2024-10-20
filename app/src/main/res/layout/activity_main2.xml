@@ -1,0 +1,51 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/btnToActivity3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#D31F2E"
+        android:text="เพิ่มร้านค้า"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:icon="@drawable/ffa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="359dp"
+        android:layout_height="585dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#17D31F2E"
+        android:backgroundTint="#D31F2E"
+        android:foregroundTint="#381111"
+        app:layout_constraintBottom_toTopOf="@+id/btnToMainActivity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnToActivity3" />
+
+    <Button
+        android:id="@+id/btnToMainActivity"
+        android:layout_width="158dp"
+        android:layout_height="51dp"
+        android:backgroundTint="#D31F2E"
+        android:text="กลับ"
+        android:textSize="24sp"
+        app:icon="@drawable/back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,80 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+
+    <EditText
+        android:id="@+id/etStoreName"
+        android:layout_width="380dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="52dp"
+        android:background="#17D31F2E"
+        android:backgroundTint="#D31F2E"
+        android:hint="ชื่อร้าน"
+        android:textColor="#D31F2E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerStatus"
+        android:layout_width="380dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="40dp"
+        android:background="#17D31F2E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etStoreName" />
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="209dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="256dp"
+        android:backgroundTint="#D31F2E"
+        android:text="ส่งข้อมูล"
+        android:textSize="24sp"
+        app:icon="@drawable/ffa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinnerStatus" />
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="136dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="96dp"
+        android:backgroundTint="#D31F2E"
+        android:text="กลับ"
+        android:textSize="24sp"
+        app:icon="@drawable/back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.978" />
+
+
+    <EditText
+        android:id="@+id/etStoreDescription"
+        android:layout_width="380dp"
+        android:layout_height="45dp"
+        android:gravity="top"
+        android:hint="กรอกรายละเอียดร้าน"
+        android:inputType="textMultiLine"
+        android:minLines="3"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerStatus"
+        app:layout_constraintVertical_bias="0.293" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
