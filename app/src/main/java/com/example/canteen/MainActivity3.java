@@ -29,29 +29,29 @@ public class MainActivity3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
-        // กำหนดค่าให้กับ View ต่างๆ
+        
         etStoreName = findViewById(R.id.etStoreName);
-        etStoreDescription = findViewById(R.id.etStoreDescription);  // เพิ่มฟิลด์รายละเอียดร้าน
+        etStoreDescription = findViewById(R.id.etStoreDescription);  
         spinnerStatus = findViewById(R.id.spinnerStatus);
         btnSubmit = findViewById(R.id.btnSubmit);
         btnBack = findViewById(R.id.btnBack);
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
-        // ตั้งค่า Spinner สำหรับสถานะร้าน
+       
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.status_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerStatus.setAdapter(adapter);
 
-        // เมื่อผู้ใช้กดปุ่ม Submit
+        
         btnSubmit.setOnClickListener(v -> {
             String storeName = etStoreName.getText().toString();
-            String storeDescription = etStoreDescription.getText().toString();  // เก็บรายละเอียดร้าน
+            String storeDescription = etStoreDescription.getText().toString();  
             String status = spinnerStatus.getSelectedItem().toString();
-            String userId = auth.getCurrentUser().getUid(); // ดึง uid ของผู้ใช้
+            String userId = auth.getCurrentUser().getUid(); 
 
-            // ตรวจสอบว่าชื่อร้านและรายละเอียดร้านไม่ว่างเปล่า
+           
             if (storeName.isEmpty()) {
                 Toast.makeText(MainActivity3.this, "กรุณากรอกชื่อร้าน", Toast.LENGTH_SHORT).show();
                 return;
@@ -61,35 +61,35 @@ public class MainActivity3 extends AppCompatActivity {
                 return;
             }
 
-            // สร้าง HashMap สำหรับเก็บข้อมูล
+            
             HashMap<String, Object> storeData = new HashMap<>();
             storeData.put("storeName", storeName);
-            storeData.put("storeDescription", storeDescription);  // เพิ่มรายละเอียดร้าน
+            storeData.put("storeDescription", storeDescription);  
             storeData.put("status", status);
-            storeData.put("ownerUid", userId);  // บันทึก uid ของเจ้าของร้าน
+            storeData.put("ownerUid", userId);  
 
-            // เพิ่มข้อมูลไปยัง Firestore
+           
             db.collection("stores").add(storeData)
                     .addOnSuccessListener(documentReference -> {
                         Toast.makeText(MainActivity3.this, "เพิ่มข้อมูลสำเร็จ", Toast.LENGTH_SHORT).show();
-                        finish();  // กลับไปยังหน้าก่อนหน้า
+                        finish(); 
                     })
                     .addOnFailureListener(e -> {
                         Toast.makeText(MainActivity3.this, "เกิดข้อผิดพลาดในการเพิ่มข้อมูล", Toast.LENGTH_SHORT).show();
                     });
         });
 
-        // เมื่อผู้ใช้กดปุ่ม Back
+        
         btnBack.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity3.this, MainActivity2.class);
             startActivity(intent);
-            finish();  // ปิด MainActivity3
+            finish();  
         });
 
-        // ตรวจสอบว่าผู้ใช้เข้าสู่ระบบหรือไม่
+       
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {
-            // ถ้าผู้ใช้ไม่ได้เข้าสู่ระบบ ให้กลับไปที่หน้า Login
+            
             Intent intent = new Intent(MainActivity3.this, LoginActivity.class);
             startActivity(intent);
             finish();
