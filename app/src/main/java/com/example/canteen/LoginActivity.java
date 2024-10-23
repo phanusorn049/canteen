@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText emailField, passwordField;
-    private Button loginButton, registerButton, logoutButton; // เพิ่มปุ่มออกจากระบบ
+    private Button loginButton, registerButton, logoutButton; 
     private FirebaseAuth mAuth;
 
     @Override
@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordField = findViewById(R.id.passwordField);
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
-        logoutButton = findViewById(R.id.btnLogout); // ผูกปุ่มออกจากระบบ
+        logoutButton = findViewById(R.id.btnLogout); 
         mAuth = FirebaseAuth.getInstance();
 
         loginButton.setOnClickListener(v -> {
@@ -46,14 +46,14 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // เพิ่ม Listener สำหรับปุ่มออกจากระบบ
+       
         logoutButton.setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut(); // ทำการออกจากระบบ
+            FirebaseAuth.getInstance().signOut(); 
             Toast.makeText(LoginActivity.this, "ออกจากระบบเรียบร้อยแล้ว", Toast.LENGTH_SHORT).show();
-            // สามารถเพิ่มการเปลี่ยนไปหน้าล็อกอินหรือหน้าอื่น ๆ ได้
+           
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
-            finish(); // ปิดหน้า Login
+            finish();
         });
     }
 
@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         if (user != null) {
             Intent intent = new Intent(LoginActivity.this, MainActivity2.class);
             startActivity(intent);
-            finish();  // ปิดหน้า Login
+            finish();  
         }
     }
 }
