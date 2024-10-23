@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "สมัครสมาชิกสำเร็จ", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(intent);
-                        finish();  // ปิดหน้า Register
+                        finish(); 
                     } else {
                         Toast.makeText(RegisterActivity.this, "การสมัครสมาชิกล้มเหลว", Toast.LENGTH_SHORT).show();
                     }
