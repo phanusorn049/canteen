@@ -23,7 +23,7 @@ public class MainActivity2 extends AppCompatActivity {
     Button btnToActivity3, btnToMainActivity;
     ListView listView;
     ArrayList<String> storeList;
-    ArrayList<String> documentIdList; // เก็บ document ID
+    ArrayList<String> documentIdList; 
     ArrayAdapter<String> arrayAdapter;
     FirebaseFirestore db;
     FirebaseAuth mAuth;
@@ -36,7 +36,7 @@ public class MainActivity2 extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        isUserLoggedIn = currentUser != null; // เช็คว่าผู้ใช้ล็อกอินอยู่หรือไม่
+        isUserLoggedIn = currentUser != null; 
 
         btnToActivity3 = findViewById(R.id.btnToActivity3);
         listView = findViewById(R.id.listView);
@@ -50,7 +50,7 @@ public class MainActivity2 extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // กดเพื่อไปยัง MainActivity3
+        
         btnToActivity3.setOnClickListener(v -> {
             if (isUserLoggedIn) {
                 Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
@@ -60,45 +60,45 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
 
-        // โหลดข้อมูลจาก Firestore
+        
         loadStoresFromFirestore();
 
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, storeList);
         listView.setAdapter(arrayAdapter);
 
-        // กดค้างเพื่อแสดงรายละเอียดร้านและแก้ไขหรือลบข้อมูล
+       
         listView.setOnItemLongClickListener((parent, view, position, id) -> {
             String documentId = documentIdList.get(position);
 
-            // ดึงข้อมูลร้านจาก Firestore
+            
             db.collection("stores").document(documentId).get().addOnSuccessListener(documentSnapshot -> {
                 if (documentSnapshot.exists()) {
                     String ownerUid = documentSnapshot.getString("ownerUid");
                     String currentUserUid = isUserLoggedIn ? mAuth.getCurrentUser().getUid() : null;
 
-                    // ตัวเลือกสำหรับทุกคน: แสดงรายละเอียด
+                   
                     ArrayList<CharSequence> options = new ArrayList<>();
                     options.add("แสดงรายละเอียด");
 
-                    // เพิ่มตัวเลือก "แก้ไข" และ "ลบ" เฉพาะเจ้าของร้าน
+                   
                     if (isUserLoggedIn && currentUserUid != null && currentUserUid.equals(ownerUid)) {
                         options.add("แก้ไขสถานะ");
-                        options.add("แก้ไขรายละเอียด");  // เพิ่มตัวเลือกแก้ไขรายละเอียด
+                        options.add("แก้ไขรายละเอียด");  
                         options.add("ลบ");
                     }
 
-                    // แสดงเมนูตัวเลือก
+                    
                     new AlertDialog.Builder(MainActivity2.this)
                             .setTitle("เลือกการกระทำ")
                             .setItems(options.toArray(new CharSequence[0]), (dialog, which) -> {
                                 if (options.get(which).equals("แสดงรายละเอียด")) {
-                                    showStoreDetails(documentId);  // แสดงรายละเอียด
+                                    showStoreDetails(documentId);  
                                 } else if (options.get(which).equals("แก้ไขสถานะ")) {
-                                    showStatusDialog(position);  // แก้ไขสถานะ
+                                    showStatusDialog(position);  
                                 } else if (options.get(which).equals("แก้ไขรายละเอียด")) {
-                                    showEditDetailsDialog(documentId);  // แก้ไขรายละเอียด
+                                    showEditDetailsDialog(documentId);  
                                 } else if (options.get(which).equals("ลบ")) {
-                                    confirmDelete(position);  // ลบข้อมูล
+                                    confirmDelete(position);  
                                 }
                             })
                             .show();
@@ -108,7 +108,7 @@ public class MainActivity2 extends AppCompatActivity {
         });
     }
 
-    // ฟังก์ชันสำหรับโหลดข้อมูลจาก Firestore
+    
     private void loadStoresFromFirestore() {
         db.collection("stores")
                 .addSnapshotListener((value, error) -> {
@@ -132,7 +132,7 @@ public class MainActivity2 extends AppCompatActivity {
                 });
     }
 
-    // ฟังก์ชันแสดงรายละเอียดร้าน
+   
     private void showStoreDetails(String documentId) {
         db.collection("stores").document(documentId).get()
                 .addOnSuccessListener(documentSnapshot -> {
@@ -141,7 +141,7 @@ public class MainActivity2 extends AppCompatActivity {
                         String storeDescription = documentSnapshot.getString("storeDescription");
                         String status = documentSnapshot.getString("status");
 
-                        // แสดงรายละเอียดร้านใน AlertDialog
+                        
                         new AlertDialog.Builder(MainActivity2.this)
                                 .setTitle("รายละเอียดร้าน")
                                 .setMessage("ชื่อร้าน: " + storeName + "\n\nรายละเอียด: " + storeDescription + "\n\nสถานะ: " + status)
@@ -151,7 +151,7 @@ public class MainActivity2 extends AppCompatActivity {
                 });
     }
 
-    // ฟังก์ชันแสดง Dialog สำหรับแก้ไขสถานะ (เฉพาะเจ้าของร้าน)
+    
     private void showStatusDialog(int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity2.this);
         builder.setTitle("แก้ไขสถานะ");
@@ -183,17 +183,17 @@ public class MainActivity2 extends AppCompatActivity {
         dialog.show();
     }
 
-    // ฟังก์ชันแสดง Dialog สำหรับแก้ไขรายละเอียด (เฉพาะเจ้าของร้าน)
+   
     private void showEditDetailsDialog(String documentId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity2.this);
         builder.setTitle("แก้ไขรายละเอียดร้าน");
 
-        // กำหนด Layout ของ Dialog ให้มีฟิลด์ EditText
+       
         final EditText input = new EditText(MainActivity2.this);
         input.setHint("กรอกรายละเอียดร้านใหม่");
         builder.setView(input);
 
-        // ดึงรายละเอียดร้านปัจจุบัน
+        
         db.collection("stores").document(documentId).get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
                 String currentDescription = documentSnapshot.getString("storeDescription");
@@ -204,7 +204,7 @@ public class MainActivity2 extends AppCompatActivity {
         builder.setPositiveButton("บันทึก", (dialog, which) -> {
             String newDescription = input.getText().toString();
 
-            // อัปเดตรายละเอียดใหม่ใน Firestore
+           
             HashMap<String, Object> updateData = new HashMap<>();
             updateData.put("storeDescription", newDescription);
             db.collection("stores").document(documentId).update(updateData)
@@ -221,7 +221,7 @@ public class MainActivity2 extends AppCompatActivity {
         builder.show();
     }
 
-    // ฟังก์ชันลบข้อมูล (เฉพาะเจ้าของร้าน)
+    
     private void confirmDelete(int position) {
         new AlertDialog.Builder(MainActivity2.this)
                 .setTitle("ยืนยันการลบ")
